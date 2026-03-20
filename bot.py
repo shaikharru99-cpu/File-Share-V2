@@ -4,7 +4,7 @@ from aiohttp import web
 from plugins import web_server
 
 import asyncio
-import pyromod
+import pyromod.listen
 from pyrogram import Client
 from pyrogram.enums import ParseMode
 import sys
@@ -22,8 +22,7 @@ class Bot(Client):
                 "root": "plugins"
             },
             workers=TG_BOT_WORKERS,
-            bot_token=TG_BOT_TOKEN,
-            parse_mode=ParseMode.HTML
+            bot_token=TG_BOT_TOKEN
         )
         self.LOGGER = LOGGER
 
@@ -51,6 +50,7 @@ class Bot(Client):
             self.LOGGER(__name__).info('Bot Stopped..')
             sys.exit()
 
+        self.set_parse_mode(ParseMode.HTML)
         self.LOGGER(__name__).info(f"ᴀᴅᴠᴀɴᴄᴇ ғɪʟᴇ-sʜᴀʀɪɴɢ ʙᴏᴛ V3 ᴍᴀᴅᴇ ʙʏ ➪ @DoraShin_hlo [Tᴇʟᴇɢʀᴀᴍ Usᴇʀɴᴀᴍᴇ]")
         self.LOGGER(__name__).info(f"{self.name} Bot Running..!")
         self.LOGGER(__name__).info(f"OPERATION SUCCESSFULL ✅")
