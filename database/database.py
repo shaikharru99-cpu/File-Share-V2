@@ -5,51 +5,26 @@ from config import DB_URI, DB_NAME
 class SidDataBase:
 
     def __init__(self, DB_URI, DB_NAME):
-        self._dbclient = None
-        self.DB_URI = DB_URI
-        self.DB_NAME = DB_NAME
-
-    @property
-    def dbclient(self):
-        if self._dbclient is None:
-            self._dbclient = motor.motor_asyncio.AsyncIOMotorClient(self.DB_URI)
-        return self._dbclient
-
-    @property
-    def database(self):
-        return self.dbclient[self.DB_NAME]
+        self.dbclient = motor.motor_asyncio.AsyncIOMotorClient(DB_URI)
+        self.database = self.dbclient[DB_NAME]
         
-    @property
-    def user_data(self): return self.database['users']
-    @property
-    def channel_data(self): return self.database['channels']
-    @property
-    def admins_data(self): return self.database['admins']
-    @property
-    def banned_user_data(self): return self.database['banned_user']
-    @property
-    def autho_user_data(self): return self.database['autho_user']
+        self.user_data = self.database['users']
+        self.channel_data = self.database['channels']
+        self.admins_data = self.database['admins']
+        self.banned_user_data = self.database['banned_user']
+        self.autho_user_data = self.database['autho_user']
+        
+        self.auto_delete_data = self.database['auto_delete']
+        self.hide_caption_data = self.database['hide_caption']
+        self.protect_content_data = self.database['protect_content']
+        self.channel_button_data = self.database['channel_button']
+        
+        self.del_timer_data = self.database['del_timer']
+        self.channel_button_link_data = self.database['channelButton_link']
 
-    @property
-    def auto_delete_data(self): return self.database['auto_delete']
-    @property
-    def hide_caption_data(self): return self.database['hide_caption']
-    @property
-    def protect_content_data(self): return self.database['protect_content']
-    @property
-    def channel_button_data(self): return self.database['channel_button']
-
-    @property
-    def del_timer_data(self): return self.database['del_timer']
-    @property
-    def channel_button_link_data(self): return self.database['channelButton_link']
-
-    @property
-    def rqst_fsub_data(self): return self.database['request_forcesub']
-    @property
-    def rqst_fsub_Channel_data(self): return self.database['request_forcesub_channel']
-    @property
-    def store_reqLink_data(self): return self.database['store_reqLink']
+        self.rqst_fsub_data = self.database['request_forcesub']
+        self.rqst_fsub_Channel_data = self.database['request_forcesub_channel']
+        self.store_reqLink_data = self.database['store_reqLink']
     
     
     # CHANNEL BUTTON SETTINGS
